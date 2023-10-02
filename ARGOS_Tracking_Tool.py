@@ -15,18 +15,20 @@ file_name = './data/raw/Sara.txt'
 #Create a file object from the file
 file_object = open(file_name,'r')
 
-#Read contents of file into a list
+#Read contents of file into a listdate
 lineString = file_object.readline()
 
-#Pretend we read one line of data from the file
-while lineString:
-    #check if line is a data line as opposed to a header
-    if lineString[0] in ("#","u"):
-        lineString = file_object.readline()
-        continue
+#Initialize empty dictionaries
+date_dict = {}
+location_dict = {}
 
-    #Split the string into a list of data items
-    lineData = lineString.split() 
+#Iterate through all lines in the list
+while lineString:
+    
+    if lineString[0] in ("#","u"):  #check if line is a data line as opposed to a header
+        lineString = file_object.readline() #What does this do?
+        continue #if it is a header, then disregard this line of data and move to the next line
+    lineData = lineString.split() #if it is not a header (real data), split the string into a list of data items
     
     #Extract items in list into variables
     record_id = lineData[0]
@@ -35,8 +37,12 @@ while lineString:
     obs_lat = lineData[6]
     obs_lon = lineData[7]
 
+    #Add items to dictionaries
+    date_dict[record_id] = obs_date
+    location_dict[record_id] = (obs_lat, obs_lon)
+
     #Print the location of sara
-    print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_lon} on {obs_date}")
+    #print(f"Record {record_id} indicates Sara was seen at lat:{obs_lat},lon:{obs_lon} on {obs_date}")
 
     # Move to the next line
     lineString = file_object.readline()
