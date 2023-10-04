@@ -61,7 +61,13 @@ for key, value in date_dict.items():
     if value == user_date:   #See if any dates (values) match the user date
         key_list.append(key)     #If so, add the key to the list of keys
 
-#Reveal locations for each key in key_list
-for key in key_list:
-    lat, lng = location_dict[key]
-    print(f"Record {key} indicates Sara was seen at lat: {lat}, lon: {lng} on {user_date}")
+
+
+#Report whether no records were found
+if len(key_list) == 0:
+    print(f"There are no observations for Sara on {user_date}")
+else:
+    #Reveal locations for each key in key_list
+    for key in key_list:
+        lat, lng = location_dict[key]
+        print(f"Record {key} indicates Sara was seen at lat: {lat}, lon: {lng} on {user_date}")
