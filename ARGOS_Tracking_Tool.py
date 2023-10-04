@@ -9,6 +9,9 @@
 # Date:   Fall 2023
 #--------------------------------------------------------------
 
+#Ask user for the search date
+user_date = input("Enter a date to search for Sara (M/D/YYYY):")
+
 #Create a variable pointing to the data file
 file_name = './data/raw/Sara.txt'
 
@@ -49,3 +52,16 @@ while lineString:
 
     # Move to the next line
     lineString = file_object.readline()
+
+#Initialize an empty key list
+key_list = []
+
+#Loop through all key, value pairs in the date dictionary
+for key, value in date_dict.items():
+    if value == user_date:   #See if any dates (values) match the user date
+        key_list.append(key)     #If so, add the key to the list of keys
+
+#Reveal locations for each key in key_list
+for key in key_list:
+    lat, lng = location_dict[key]
+    print(f"Record {key} indicates Sara was seen at lat: {lat}, lon: {lng} on {user_date}")
